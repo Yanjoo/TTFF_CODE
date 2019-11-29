@@ -27,9 +27,7 @@ public class CarMove : MonoBehaviour
     {
         state = target.state;
         targetSpeed = target.MoveSpeed;
-
-        if (state == Car.CarState.STAY) target.state = Car.CarState.MOVE;
-
+        
         if (state == Car.CarState.MOVE)
             transform.Translate(0f, 0f, targetSpeed * Time.deltaTime); // 차 이동
     }
