@@ -22,12 +22,13 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scores = new float[4];
+        scores = new float[3];
     }
 
     public void SetScore(float score)
     {
         scores[index++] = score;
+        if (index == 3) index = 0;
     }
 
     public float GetScore(int i) { return scores[i]; }

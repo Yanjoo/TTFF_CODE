@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
         timeCnt += Time.deltaTime;
         string timeStr = timeCnt.ToString("00.00");
         timeStr = timeStr.Replace(".", ":");
-        text_timer.text = timeStr;
+        text_timer.text = "Score : " + timeStr;
     }
 
     public float GetTime()

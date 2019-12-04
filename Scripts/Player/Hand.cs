@@ -30,7 +30,7 @@ public class Hand : MonoBehaviour
     void Update()
     {
         string name = SceneManager.GetActiveScene().name;
-        if (name.Equals("MainMenu") || name.Equals("Ending"))
+        if (name.Equals("MainMenu") || name.Equals("Ending") || name.Equals("Death"))
         {
             GetComponent<Collider>().enabled = true;
             GetComponent<MeshRenderer>().enabled = true;
@@ -63,6 +63,18 @@ public class Hand : MonoBehaviour
             if (grap)
             {
                 SceneManager.LoadScene("MainMenu");
+                ScoreManager score = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+                for (int i = 0; i < 3; i++)
+                    score.SetScore(0);
+            }
+        }
+        if (other.gameObject.CompareTag("Retry"))
+        {
+            if (grap)
+            {
+                DeathAnimation playerDeath = GameObject.Find("badending").GetComponent<DeathAnimation>();
+                SceneManager.LoadScene(playerDeath.sceneName);
+                LifeManagement.Hit = 0;
             }
         }
     }

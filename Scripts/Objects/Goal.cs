@@ -14,13 +14,13 @@ public class Goal : MonoBehaviour
 {
     private Timer timer;
     private ScoreManager scoreManager;
-    // private ChangeScene chagescene;
 
     // Start is called before the first frame update 
     void Start()
     {
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        LifeManagement.SceneName = SceneManager.GetActiveScene().name;
     }
 
     private void OnCollisionEnter(Collision col)
@@ -32,17 +32,16 @@ public class Goal : MonoBehaviour
         }
     }
 
-
     void NextScene()
     {
         string name = SceneManager.GetActiveScene().name;
 
         if (name == "Tutorial")
-            SceneManager.LoadScene("Round1");
+            LoadingSceneManager.LoadScene("Round1");
         else if (name == "Round1")
-            SceneManager.LoadScene("Round2");
+            LoadingSceneManager.LoadScene("Round2");
         else if (name == "Round2")
-            SceneManager.LoadScene("Round3");
+            LoadingSceneManager.LoadScene("Round3");
         else if (name == "Round3")
             SceneManager.LoadScene("Ending");
     }

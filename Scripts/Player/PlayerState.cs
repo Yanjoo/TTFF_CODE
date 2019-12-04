@@ -15,7 +15,7 @@ public class PlayerState : MonoBehaviour
     public static int NORMAL = -1;
     public static int RUN = 0;
     public static int HIT = 1;
-    public static int CRASH = 9;
+    public static int DEATH = 9;
     public static int DIZZY = 2;
 
     public static class Rotation

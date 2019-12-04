@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         state = PlayerState.NORMAL;
-
         move = false;
         jaywalking = false;
 
@@ -36,6 +35,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LifeManagement.Life <= 0) SceneManager.LoadScene("Death");
+        
         if (state == PlayerState.DIZZY || state == PlayerState.HIT) return;
 
         if (LeftHand.grap || RightHand.grap)

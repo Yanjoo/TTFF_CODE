@@ -26,8 +26,8 @@ public class CarCollider : MonoBehaviour
     {
         firePos = target.transform;
         SafeDistance = target.SafeDistance;
-        
-        if (state == Car.CarState.STAY) target.state = Car.CarState.MOVE;
+
+        if (target.state == Car.CarState.STAY) target.state = Car.CarState.MOVE;
 
         Debug.DrawRay(firePos.position, firePos.forward * SafeDistance, Color.green);
 

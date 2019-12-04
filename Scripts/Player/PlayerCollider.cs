@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollider : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class PlayerCollider : MonoBehaviour
         if (col.gameObject.tag == "Car")
         {
             StartCoroutine(ShowRedScreen());
+            LifeManagement.Hit++;
         }
         if (col.gameObject.tag == "Enemy")
         {

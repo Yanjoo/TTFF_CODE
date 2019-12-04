@@ -63,9 +63,6 @@ public class PlayerMove : MonoBehaviour
         {
             if (timer > delay) player.SetState(PlayerState.NORMAL);
         }
-        else if (state == PlayerState.CRASH)
-        { 
-        }
         else
         {
             speed = 0;

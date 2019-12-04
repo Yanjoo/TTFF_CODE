@@ -3,7 +3,7 @@
  * 작성자 : 정채은, 홍영선 (이한주, 안한길, 정채은, 황승혜, 홍영선)
  * 작성일 : 2019년 11월 17일
  * 프로그램 설명 : 신호등의 지속시간이 지정한 시간(빨간불, 초록불)을 넘으면 신호등의 불을 바꾼다.
- ************************/ 
+ ************************/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,13 +12,10 @@ using System;
 
 public class TrafficLightState : MonoBehaviour
 {
-    [SerializeField]
     private TrafficLight target;
-
-    [SerializeField]
+    private GameObject redCircle;
     private GameObject redLight;
-
-    [SerializeField]
+    private GameObject greenCircle;
     private GameObject greenLight;
 
     [SerializeField]
@@ -43,9 +40,17 @@ public class TrafficLightState : MonoBehaviour
     void Start()
     {
         //target = GameObject.Find("TrafficLight").GetComponent<TrafficLight>();
+        target = transform.GetComponent<TrafficLight>();
 
-        redLight.GetComponent<Renderer>().material.color = Color.red;
-        greenLight.GetComponent<Renderer>().material.color = Color.gray;
+        greenCircle = transform.GetChild(0).gameObject;
+        greenLight = greenCircle.transform.GetChild(0).gameObject;
+        greenLight.SetActive(false);
+
+        redCircle = transform.GetChild(1).gameObject;
+        redLight = redCircle.transform.GetChild(0).gameObject;
+
+        redCircle.GetComponent<Renderer>().material.color = Color.red;
+        greenCircle.GetComponent<Renderer>().material.color = Color.gray;
         fsm.Add(TrafficFunctions.RED, new Action(RedLight));
         fsm.Add(TrafficFunctions.GREEN, new Action(GreenLight));
         StopPoint = TrafficFunctions.RED;
@@ -73,8 +78,11 @@ public class TrafficLightState : MonoBehaviour
         // 현재 신호(빨간불)이 지정된 신호(빨간불) 시간을 넘으면
         if (target.GetTrafficLight() > target.GetRedLight())
         {
-            greenLight.GetComponent<Renderer>().material.color = Color.green;
-            redLight.GetComponent<Renderer>().material.color = Color.gray;
+            greenCircle.GetComponent<Renderer>().material.color = Color.green;
+            redCircle.GetComponent<Renderer>().material.color = Color.gray;
+            greenLight.SetActive(true);
+            redLight.SetActive(false);
+
             target.SetTrafficLight(0.0f);
             LastTransition(TrafficFunctions.GREEN);
             stopTrigger.SetActive(true);
@@ -87,8 +95,11 @@ public class TrafficLightState : MonoBehaviour
         // 현재 신호(초록불)이 지정된 신호(초록불) 시간을 넘으면
         if (target.GetTrafficLight() > target.GetGreenLight())
         {
-            greenLight.GetComponent<Renderer>().material.color = Color.gray;
-            redLight.GetComponent<Renderer>().material.color = Color.red;
+            greenCircle.GetComponent<Renderer>().material.color = Color.gray;
+            redCircle.GetComponent<Renderer>().material.color = Color.red;
+            greenLight.SetActive(false);
+            redLight.SetActive(true);
+
             target.SetTrafficLight(0.0f);
             LastTransition(TrafficFunctions.RED);
             stopTrigger.SetActive(false);
