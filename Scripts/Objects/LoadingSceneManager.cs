@@ -20,7 +20,6 @@ public class LoadingSceneManager : MonoBehaviour
     public Text text_tip;
     public Image color_progress;
 
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(LoadScene());
@@ -66,8 +65,7 @@ public class LoadingSceneManager : MonoBehaviour
         camera.backgroundColor = Color.black;
         text_loading.color = Color.white;
         text_tip.color = Color.white;
-        text_tip.text = "                                        Tip!\n" +
-            "바닥에 파란 타일을 따라가면 횡단보도가 나와요!";
+        text_tip.text = "Tip!\n" + "바닥에 파란 타일을 따라가면 횡단보도가 나와요!";
     }
 
     private void SetLoading3()
@@ -76,7 +74,6 @@ public class LoadingSceneManager : MonoBehaviour
         camera.backgroundColor = Color.gray;
         text_loading.color = Color.black;
         text_tip.color = Color.black;
-        text_tip.text = "                                        Tip!\n" +
-            "무단횡단을 하면 경찰관이 쫓아옵니다.";
+        text_tip.text = "Tip!\n" + "무단횡단을 하면 경찰관이 쫓아옵니다.";
     }
 }
