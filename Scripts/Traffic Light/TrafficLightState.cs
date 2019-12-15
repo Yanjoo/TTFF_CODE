@@ -1,4 +1,4 @@
-﻿/************************
+/************************
  * 프로그램명 : TrafficLightState.cs
  * 작성자 : 정채은, 홍영선 (이한주, 안한길, 정채은, 황승혜, 홍영선)
  * 작성일 : 2019년 11월 17일
@@ -36,10 +36,8 @@ public class TrafficLightState : MonoBehaviour
 
     private Dictionary<TrafficFunctions, Action> fsm = new Dictionary<TrafficFunctions, Action>();
 
-    // Start is called before the first frame update
     void Start()
     {
-        //target = GameObject.Find("TrafficLight").GetComponent<TrafficLight>();
         target = transform.GetComponent<TrafficLight>();
 
         greenCircle = transform.GetChild(0).gameObject;
@@ -57,7 +55,6 @@ public class TrafficLightState : MonoBehaviour
         stopTrigger.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         fsm[StopPoint].Invoke();
@@ -77,14 +74,17 @@ public class TrafficLightState : MonoBehaviour
     {
         // 현재 신호(빨간불)이 지정된 신호(빨간불) 시간을 넘으면
         if (target.GetTrafficLight() > target.GetRedLight())
-        {
+        {   
+            // 초록불을 활성화 한다.
             greenCircle.GetComponent<Renderer>().material.color = Color.green;
             redCircle.GetComponent<Renderer>().material.color = Color.gray;
             greenLight.SetActive(true);
             redLight.SetActive(false);
-
-            target.SetTrafficLight(0.0f);
             LastTransition(TrafficFunctions.GREEN);
+
+            // 신호등 시간 초기화
+            target.SetTrafficLight(0.0f);
+            // 자동차를 멈추게 한다
             stopTrigger.SetActive(true);
             goTrigger.SetActive(false);
         }
@@ -95,13 +95,16 @@ public class TrafficLightState : MonoBehaviour
         // 현재 신호(초록불)이 지정된 신호(초록불) 시간을 넘으면
         if (target.GetTrafficLight() > target.GetGreenLight())
         {
+            // 빨간불을 활성화한다.
             greenCircle.GetComponent<Renderer>().material.color = Color.gray;
             redCircle.GetComponent<Renderer>().material.color = Color.red;
             greenLight.SetActive(false);
             redLight.SetActive(true);
-
-            target.SetTrafficLight(0.0f);
             LastTransition(TrafficFunctions.RED);
+
+            // 신호등 시간 초기화
+            target.SetTrafficLight(0.0f);
+            // 자동차를 움직이게 한다.
             stopTrigger.SetActive(false);
             goTrigger.SetActive(true);
         }
